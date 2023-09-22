@@ -97,6 +97,7 @@ public class ControllerServlet extends HttpServlet {
                 // Gửi danh sách tài khoản đến trang JSP để hiển thị
                 List<Account> allAccounts = accountRepository.getAllAccount();
                 req.setAttribute("ACCOUNT", allAccounts);
+                System.out.println(allAccounts);
 
                 // Sử dụng RequestDispatcher để chuyển tiếp yêu cầu đến trang JSP
                 RequestDispatcher dispatcher = req.getRequestDispatcher("accountList.jsp");

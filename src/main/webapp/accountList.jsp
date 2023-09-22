@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +10,7 @@
 </head>
 <body>
 <div class="container mt-5">
-    <h1>Account List</h1>
+    <h1>Thông tin account</h1>
 
     <table class="table table-striped">
         <thead>
@@ -35,7 +36,7 @@
     </table>
 
     <br>
-    <a href="logout.jsp" class="btn btn-primary">Logout</a> <!-- Đường dẫn đến trang logout.jsp để đăng xuất -->
+    <a href="index.jsp" class="btn btn-primary">Logout</a> <!-- Đường dẫn đến trang logout.jsp để đăng xuất -->
 </div>
 
 <!-- Thêm thẻ script để kết nối với JavaScript của Bootstrap -->
