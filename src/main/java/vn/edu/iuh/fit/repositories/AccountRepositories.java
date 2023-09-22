@@ -117,6 +117,25 @@ public class AccountRepositories {
         }
         return false;
     }
+    public Account getAccountById(String accountId) {
+        Account account = null;
+        try {
+            String sql = "SELECT * FROM account WHERE account_id=?";
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setString(1, accountId);
+
+            ResultSet resultSet = stm.executeQuery();
+
+            if (resultSet.next()) {
+                account = mapResultSetToAccount(resultSet);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return account;
+    }
+
 
     private Account mapResultSetToAccount(ResultSet resultSet) throws SQLException {
         String accountId = resultSet.getString("account_id");

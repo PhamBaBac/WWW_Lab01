@@ -34,7 +34,7 @@
         <div class="mb-3">
             <label for="account_id" class="form-label">AccountID</label>
             <input id="account_id" name="account_id" class="form-control" aria-describedby="emailHelp">
-            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>

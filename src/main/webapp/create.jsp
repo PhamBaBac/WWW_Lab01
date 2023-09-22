@@ -26,34 +26,11 @@
             background-color: #ddd;
             color: black;
         }
-        #deleteForm{
-            display: none;
-        }
+
 
     </style>
-
-    <script>
-        function showForm(formId) {
-            var forms = document.getElementsByTagName('form');
-            for (var i = 0; i < forms.length; i++) {
-                forms[i].style.display = 'none'; // Hide all forms
-            }
-            document.getElementById(formId).style.display = 'block'; // Show the clicked form
-        }
-    </script>
 </head>
 <body>
-
-<nav class="navbar navbar-expand-sm">
-    <ul class="navbar-nav">
-        <li class="nav-item">
-            <a class="nav-link" href="#" onclick="showForm('createUpdateForm')">Create/Update</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#" onclick="showForm('deleteForm')">Delete</a>
-        </li>
-    </ul>
-</nav>
 
 <div class="container mt-3">
     <form id="createUpdateForm" method="post" action="login">
@@ -82,15 +59,6 @@
             <input type="text" class="form-control" id="status" name="status">
         </div>
         <button type="submit" class="btn btn-primary" name="action" value="Create">Create</button>
-        <button type="submit" class="btn btn-primary" name="action" value="Update">Update</button>
-    </form>
-
-    <form id="deleteForm" method="post" action="login">
-        <div class="form-group">
-            <label for="account_id_delete">AccountId:</label>
-            <input type="text" class="form-control" id="account_id_delete" name="account_id_delete" required>
-        </div>
-        <button type="submit" class="btn btn-danger" name="action" value="Delete">Delete</button>
     </form>
 </div>
 

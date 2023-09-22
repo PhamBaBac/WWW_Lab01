@@ -92,12 +92,16 @@ public class ControllerServlet extends HttpServlet {
 
             // Chuyển hướng đến trang tương ứng dựa trên vai trò
             if (roleIds.contains("admin")) {
-                resp.sendRedirect("admin.jsp");
+                List<Account> allAccounts = accountRepository.getAllAccount();
+                req.setAttribute("dashboard", allAccounts);
+
+                // Sử dụng RequestDispatcher để chuyển tiếp yêu cầu đến trang JSP
+                RequestDispatcher dispatcher = req.getRequestDispatcher("dashboard.jsp");
+                dispatcher.forward(req, resp);
             } else {
                 // Gửi danh sách tài khoản đến trang JSP để hiển thị
                 List<Account> allAccounts = accountRepository.getAllAccount();
                 req.setAttribute("ACCOUNT", allAccounts);
-                System.out.println(allAccounts);
 
                 // Sử dụng RequestDispatcher để chuyển tiếp yêu cầu đến trang JSP
                 RequestDispatcher dispatcher = req.getRequestDispatcher("accountList.jsp");
@@ -147,21 +151,32 @@ public class ControllerServlet extends HttpServlet {
 
                 case "Update":
                     String accountIdToUpdate = req.getParameter("account_id");
-                    String newFullName = req.getParameter("full_name");
-                    String newPassword = req.getParameter("password");
-                    String newEmail = req.getParameter("email");
-                    String newPhone = req.getParameter("phone");
-                    int newStatus = Integer.parseInt(req.getParameter("status"));
 
-                    Account updatedAccount = new Account(accountIdToUpdate, newFullName, newPassword, newEmail, newPhone, newStatus);
+                    // Trước tiên, kiểm tra xem tài khoản có tồn tại không
+                    Account existingAccount = AccRepo.getAccountById(accountIdToUpdate);
 
+                    if (existingAccount != null) {
+                        // Tài khoản tồn tại, tiếp tục với việc cập nhật
+                        String newFullName = req.getParameter("full_name");
+                        String newPassword = req.getParameter("password");
+                        String newEmail = req.getParameter("email");
+                        String newPhone = req.getParameter("phone");
+                        int newStatus = Integer.parseInt(req.getParameter("status"));
 
-                    Boolean resultUpdateAccount = AccRepo.updateAccount(updatedAccount, accountIdToUpdate);
+                        // Tạo đối tượng tài khoản mới để cập nhật
+                        Account updatedAccount = new Account(accountIdToUpdate, newFullName, newPassword, newEmail, newPhone, newStatus);
 
-                    if (resultUpdateAccount) {
-                        resp.getWriter().println("Update success !!!");
+                        // Thực hiện cập nhật
+                        Boolean resultUpdateAccount = AccRepo.updateAccount(updatedAccount, accountIdToUpdate);
+
+                        if (resultUpdateAccount) {
+                            resp.getWriter().println("Update success !!!");
+                        } else {
+                            resp.getWriter().println("Update failed !!!");
+                        }
                     } else {
-                        resp.getWriter().println("Update failed !!!");
+                        // Tài khoản không tồn tại
+                        resp.getWriter().println("Account does not exist !!!");
                     }
                     break;
                 default:

@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Account List</title>
+    <title>user</title>
     <!-- Thêm thẻ link để kết nối với CSS của Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
@@ -34,9 +34,9 @@
         </c:forEach>
         </tbody>
     </table>
-
-    <br>
-    <a href="index.jsp" class="btn btn-primary">Logout</a> <!-- Đường dẫn đến trang logout.jsp để đăng xuất -->
+    <div class="mt-3">
+        <a href="index.jsp" class="btn btn-primary">Logout</a>
+    </div>
 </div>
 
 <!-- Thêm thẻ script để kết nối với JavaScript của Bootstrap -->
