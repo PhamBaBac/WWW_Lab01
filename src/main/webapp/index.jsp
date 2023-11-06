@@ -30,7 +30,7 @@
 
 </style>
 <div class="wrapper">
-    <form action="login" method="POST">
+    <form action="controller" method="POST">
         <div class="mb-3">
             <label for="account_id" class="form-label">AccountID</label>
             <input id="account_id" name="account_id" class="form-control" aria-describedby="emailHelp">
@@ -41,7 +41,7 @@
             <input id="password" name="password" type="password" class="form-control">
         </div>
 
-        <button name="action" value="login" type="submit" class="btn btn-primary">Submit</button>
+        <button name="action" value="login" type="submit" class="btn btn-primary">Login</button>
     </form>
 </div>
 </body>

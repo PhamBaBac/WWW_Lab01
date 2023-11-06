@@ -11,7 +11,7 @@
 <div class="container mt-5">
     <h1>Thông tin account</h1>
 
-    <form action="login" method="post">
+    <form action="controller" method="post">
         <table class="table table-striped">
             <thead>
             <tr>
@@ -34,20 +34,21 @@
 
                     <td><input type="hidden" name="account_id_delete" value="${account.accountId}">
                         <button type="submit" class="btn btn-danger" name="action" value="Delete">Delete</button></td>
-
                 </tr>
             </c:forEach>
             </tbody>
         </table>
-
-        <!-- Add Create and Update buttons here -->
         <div class="mt-3">
             <a href="create.jsp" class="btn btn-success">Create</a>
-            <a href="update.jsp" class="btn btn-primary">Update</a>
+            <button name="action" value="Permission" type="submit" class="btn btn-primary">Permission</button>
+            <button name="action" value="ViewRole" type="submit" class="btn btn-success">ViewRole</button>
+            <button name="action" value="ViewLog" type="submit" class="btn btn-success">ViewLog</button>
         </div>
-
+        <br>
+        <diV class="mt-3">
+            <button name="action" value="LogOut" type="submit" class="btn btn-success">LogOut</button>
+        </diV>
     </form>
-
 </div>
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

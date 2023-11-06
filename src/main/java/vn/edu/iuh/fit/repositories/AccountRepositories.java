@@ -12,7 +12,6 @@ import java.util.List;
 
 public class AccountRepositories {
     Connection con;
-
     public AccountRepositories() {
         con = ConnectDB.getInstance().getConnection();
     }
@@ -53,7 +52,6 @@ public class AccountRepositories {
                 Account account = new Account();
                 account.setAccountId(rs.getString("account_id"));
                 account.setPassword(rs.getString("password"));
-                // Thêm các trường khác nếu cần
                 return account;
             }
         } catch (SQLException e) {
@@ -87,27 +85,7 @@ public class AccountRepositories {
         try {
             String sql = "DELETE FROM account WHERE account_id=?";
             PreparedStatement stm = con.prepareStatement(sql);
-            stm.setString(1, accountId); // Sử dụng accountId để xác định tài khoản cần xóa
-
-            if (stm.executeUpdate() > 0) {
-                return true;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    public boolean updateAccount(Account acc, String accountId) {
-        try {
-            String sql = "UPDATE account SET full_name=?, password=?, email=?, phone=?, status=? WHERE account_id=?";
-            PreparedStatement stm = con.prepareStatement(sql);
-            stm.setString(1, acc.getFullName());
-            stm.setString(2, acc.getPassword());
-            stm.setString(3, acc.getEmail());
-            stm.setString(4, acc.getPhone());
-            stm.setInt(5, acc.getStatus());
-            stm.setString(6, accountId); // Sử dụng accountId để xác định tài khoản cần cập nhật
+            stm.setString(1, accountId);
 
             if (stm.executeUpdate() > 0) {
                 return true;
@@ -135,7 +113,33 @@ public class AccountRepositories {
         }
         return account;
     }
+    public List<Account> getAllAccountByRole_id(String role_id) {
+        List<Account> accounts = new ArrayList<>();
+        try {
+            String sql = "SELECT account.* " +
+                    "FROM account " +
+                    "INNER JOIN grant_access ON account.account_id = grant_access.account_id " +
+                    "INNER JOIN role ON grant_access.role_id = role.role_id " +
+                    "WHERE role.role_id = ?";
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setString(1, role_id);
+            ResultSet rs = stm.executeQuery();
 
+            while (rs.next()) {
+                Account acc = new Account();
+                acc.setAccountId(rs.getString("account_id"));
+                acc.setFullName(rs.getString("full_name"));
+                acc.setPassword(rs.getString("password"));
+                acc.setEmail(rs.getString("email"));
+                acc.setPhone(rs.getString("phone"));
+                acc.setStatus(rs.getInt("status"));
+                accounts.add(acc);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return accounts;
+    }
 
     private Account mapResultSetToAccount(ResultSet resultSet) throws SQLException {
         String accountId = resultSet.getString("account_id");

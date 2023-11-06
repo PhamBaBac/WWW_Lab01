@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Logs {
     private Integer logId;
-    private Integer accountId;
+    private String accountId; // Thay đổi kiểu dữ liệu thành String
     private Date loginTime;
     private Date logoutTime;
     private String note;
@@ -12,7 +12,7 @@ public class Logs {
     // Constructors
     public Logs() {}
 
-    public Logs(Integer logId, Integer accountId, Date loginTime, Date logoutTime, String note ) {
+    public Logs(Integer logId, String accountId, Date loginTime, Date logoutTime, String note) {
         this.logId = logId;
         this.accountId = accountId;
         this.loginTime = loginTime;
@@ -30,11 +30,11 @@ public class Logs {
         this.logId = logId;
     }
 
-    public Integer getAccountId() {
+    public String getAccountId() { // Sử dụng kiểu dữ liệu String
         return accountId;
     }
 
-    public void setAccountId(Integer accountId) {
+    public void setAccountId(String accountId) { // Sử dụng kiểu dữ liệu String
         this.accountId = accountId;
     }
 
